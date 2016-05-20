@@ -1,9 +1,11 @@
--Matrikelnummer sollte nicht verschickt werden
+-Matrikelnummer sollte nicht verschickt werden?
+
 -Im Pruefungsfach steht bisher nur komische Signatur 'PO'
 
 -Programm ausfuehren mit ProgrammName <from> <Server> <User> <Password> <Betreff>
 
--NotenListeFormatiert-Datei sollte am Ende geloescht werden
+-Dateinamen uebergeben oder nicht?
+ (Vorteil: Werden einfach uebergeben Nachteil: Es werden 7 Parameter uebergeben)
 
 Noch zu tun:
 
