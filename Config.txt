@@ -1,0 +1,12 @@
+[smtpFrom] david.michael.makowski@student.uni-augsburg.de
+[smtpServer] smtp.uni-augsburg.de
+[smtpUser] makowsda
+[smtpPass] Swordfish1
+[subject] Viech
+
+Hallo <Vorname> <Nachname>
+
+du hast folgende Note: <Note>
+
+Hoffentlich hast Du es nicht versaut.
+Viel Erfolg im weiteren Studium.

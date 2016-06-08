@@ -1,0 +1,39 @@
+#!/bin/bash
+
+#remove previous Log File if one exists
+rm ErrorLog.csv
+
+#read out the email information from the config file
+smtpFrom=$(ps -ef | awk -F" " 'NR==1 {print $2}' Config.txt)
+smtpServer=$(ps -ef | awk -F" " 'NR==2 {print $2}' Config.txt)
+smtpUser=$(ps -ef | awk -F" " 'NR==3 {print $2}' Config.txt)
+smtpPass=$(ps -ef | awk -F" " 'NR==4 {print $2}' Config.txt)
+subject=$(ps -ef | awk -F" " 'NR==5 {print $2}' Config.txt)
+
+#Read the messageBody for Email from passed File
+awk 'NR>=7 {print $0 > "messageBody.txt"}' Config.txt 
+messageBody=$(<messageBody.txt)
+
+#Format File for Input and verify Input
+awk -F";" ' NR>=3 {if(($2 ~ /^[a-zA-Z]+$/)&&
+		      ($3 ~ /^[a-zA-Z]+$/)&&
+		      ($4 ~ /@/)&&
+	              ($5 ~ /[1-5](\.|\,)[0-9]/))
+			{print $2,$3,$4,$5,$12 > "NotenListeFormatiert.csv";}
+		   else
+			{print "Fehler in Zeile", NR > "ErrorLog.csv";}}' test2.csv
+
+#Read the formated InputFile and Send the mail
+while read Nachname Vorname Email Note PFach
+do	
+	#Replace the Variables in the body File 
+	replaceVorname="${messageBody/<Vorname>/$Vorname}"
+	replaceNachname="${replaceVorname/<Nachname>/$Nachname}"
+	replaceNote="${replaceNachname/<Note>/$Note}"
+	#send the email
+	sendEmail -f $smtpFrom -t $Email -u $subject -m "$replaceNote" -s $smtpServer -xu $smtpUser -xp $smtpPass
+done < NotenListeFormatiert.csv 
+
+#Remove the temp files
+rm NotenListeFormatiert.csv
+rm messageBody.txt
