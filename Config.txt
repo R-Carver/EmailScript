@@ -1,8 +1,8 @@
 [smtpFrom] david.michael.makowski@student.uni-augsburg.de
 [smtpServer] smtp.uni-augsburg.de
-[smtpUser] makowsda
-[smtpPass] Swordfish1
-[subject] Viech
+[smtpUser] ******
+[smtpPass] ******
+[subject] meinBetreff
 
 Hallo <Vorname> <Nachname>
 
