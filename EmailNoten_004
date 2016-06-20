@@ -21,7 +21,7 @@ awk -F";" ' NR>=3 {if(($2 ~ /^[a-zA-Z]+$/)&&
 	              ($5 ~ /[1-5](\.|\,)[0-9]/))
 			{print $2,$3,$4,$5,$12 > "NotenListeFormatiert.csv";}
 		   else
-			{print "Fehler in Zeile", NR > "ErrorLog.csv";}}' test2.csv
+			{print "Fehler in Zeile", NR > "ErrorLog.csv";}}' $1
 
 #Read the formated InputFile and Send the mail
 while read Nachname Vorname Email Note PFach
